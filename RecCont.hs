@@ -16,3 +16,13 @@ ft f = \(T x) -> T $ \g -> x (g . f)
 -- ^
 -- λ run id (ft (+10) (t 10))
 -- 20
+
+rec :: Int -> T Int
+rec x = t (x - 1)
+
+bind :: (a -> T b) -> T a -> T b
+bind f x = run f x
+
+-- ^
+-- λ run id $ bind rec . bind rec $ t 10
+-- 8
