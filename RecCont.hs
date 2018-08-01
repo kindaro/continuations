@@ -36,3 +36,11 @@ bind f x = run f x
 -- ^
 -- λ run id $ bind rec . bind rec $ t 10
 -- 8
+
+-- | This is the cartesian product on T.
+mf :: T a -> T b -> T (a, b)
+mf x y = t (run id x, run id y)
+
+-- ^
+-- λ run id $ ft (uncurry (+)) $ mf (t 1) (t 2)
+-- 3
