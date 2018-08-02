@@ -36,6 +36,9 @@ bind f x = run f x
 -- ^
 -- λ run id $ bind rec . bind rec $ t 10
 -- 8
+--
+-- λ run id $ foldl (.) id (replicate 10 $ bind rec) $ t 10
+-- 0
 
 -- | This is the cartesian product on T.
 mf :: T a -> T b -> T (a, b)
