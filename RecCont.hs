@@ -37,6 +37,13 @@ runft :: (T a -> T b) -> a -> b
 runft f x = run id $ f (t x)
 
 
+-- | This is the contravariant morphism of the functor on T.
+
+contraft :: (a -> b) -> T b -> T a
+contraft f = undefined  -- ^ It is actually impossible to write. The initial value of a
+                        --   continuation defined this way is fixed and inaccessible.
+
+
 -- | A Kleisli morphism into T.
 
 rec :: Int -> T Int
