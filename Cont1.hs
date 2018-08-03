@@ -37,12 +37,3 @@ t1 = T1
 
 run :: (a -> m ()) -> T1 m a -> m ()
 run f (T1 x) = x f
-
-
--- | This is the arrow operation of T.
---
--- λ run print $ ft (+3) (t 2)
--- 5
-
-ft :: (a -> b) -> T1 m a -> T1 m b
-ft f = \(T1 x) -> T1 $ \g -> x (g . f)
