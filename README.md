@@ -11,7 +11,7 @@ consideration is to assign *undefined* as terminal object, denote it as 1, and s
 continuations have type `(i -> r) -> 1`. Since in JS all functions are effectful, I may elaborate
 to `(i -> m r) -> m 1`. This is now a readily acceptable type signature for Haskell. The
 implication is that the runner for such objects may only have type `(a -> m 1) -> m 1` --- with
-return type fixed. A trivial function parameter for such runner might be: the `console.log` in JS,
+return type fixed. A trivial function parameter for such runner might be: `console.log` in JS,
 `print` in Haskell.
 
 The observation companion to the first is that, in Haskell, instances of Functor, Applicative and
