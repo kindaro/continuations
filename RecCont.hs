@@ -71,7 +71,7 @@ bind f x = run f x
 -- 0
 
 bind' :: (a -> T b) -> T a -> T b
-bind' f x = T $ \k -> run (run k) (ft f x)
+bind' f x = T $ \k -> (run . run) k (ft f x)
 
 
 -- | And yet another way of spelling bind. Is it distinct?
