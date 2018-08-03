@@ -1,7 +1,8 @@
 {-# LANGUAGE Rank2Types #-}
 
 
-module Cont1 where
+module Cont1 (T1, t1, t, run)
+  where
 
 
 -- | This is the monadic version of the functor T described in RecCont.
