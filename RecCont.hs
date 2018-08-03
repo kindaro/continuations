@@ -62,6 +62,30 @@ bind :: (a -> T b) -> T a -> T b
 bind f x = run f x
 
 
+-- | Another way of spelling bind. Is it distinct?
+--
+-- λ run id $ bind' rec . bind' rec $ t 10
+-- 8
+--
+-- λ run id $ foldl (.) id (replicate 10 $ bind' rec) $ t 10
+-- 0
+
+bind' :: (a -> T b) -> T a -> T b
+bind' f x = T $ \k -> run (run k) (ft f x)
+
+
+-- | And yet another way of spelling bind. Is it distinct?
+--
+-- λ run id $ bind' rec . bind' rec $ t 10
+-- 8
+--
+-- λ run id $ foldl (.) id (replicate 10 $ bind' rec) $ t 10
+-- 0
+
+bind3 :: (a -> T b) -> T a -> T b
+bind3 f (T x) = T $ \k -> x (run k . f)
+
+
 -- | This is the cartesian product on T.
 --
 -- λ run id $ ft (uncurry (+)) $ mf (t 1) (t 2)
