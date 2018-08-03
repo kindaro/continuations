@@ -6,13 +6,13 @@ Introduction.
 My goal here is to explore continuation passing, insomuch as is to my ability, from the categorial
 perspective, and on the vessels of Haskell and JavaScript.
 
-The first observation I want to pinpoint is that, in JavaScript, continuations never return. My
-consideration is to assign *undefined* as terminal object, denote it as 1, and say that JS
-continuations have type `(i -> r) -> 1`. Since in JS all functions are effectful, I may elaborate
-to `(i -> m r) -> m 1`. This is now a readily acceptable type signature for Haskell. The
-implication is that the runner for such objects may only have type `(a -> m 1) -> m 1` --- with
-return type fixed. A trivial function parameter for such runner might be: `console.log` in JS,
-`print` in Haskell.
+The first observation I want to pinpoint is that, in JavaScript, continuations that represent
+asynchronous computations never return. My consideration is to assign *undefined* as terminal
+object, denote it as 1, and say that JS continuations have type `(i -> r) -> 1`. Since in JS all
+functions are effectful, I may elaborate to `(i -> m r) -> m 1`. This is now a readily acceptable
+type signature for Haskell. The implication is that the runner for such objects may only have type
+`(a -> m 1) -> m 1` --- with return type fixed. A trivial function parameter for such runner might
+be: `console.log` in JS, `print` in Haskell.
 
 The observation companion to the first is that, in Haskell, instances of Functor, Applicative and
 Monad for continuations (in [transformers][1]) are phrased in terms of the runner. Should that
