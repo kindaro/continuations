@@ -74,7 +74,7 @@ bind' :: (a -> T b) -> T a -> T b
 bind' f x = T $ \k -> (run . run) k (ft f x)
 
 
--- | And yet another way of spelling bind. Is it distinct?
+-- | And yet another way of spelling bind.
 --
 -- λ run id $ bind' rec . bind' rec $ t 10
 -- 8
@@ -97,7 +97,7 @@ bind3 f (T x) = T $ \k -> x (run k . f)
 -- 0
 
 bindT :: (a -> T b) -> T a -> T b
-bindT f m = T $ \c -> run (\x -> run c (f x)) m
+bindT k m = T $ \c -> run (\x -> run c (k x)) m
 
 
 -- | This is the cartesian product on T.
