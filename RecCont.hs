@@ -86,6 +86,20 @@ bind3 :: (a -> T b) -> T a -> T b
 bind3 f (T x) = T $ \k -> x (run k . f)
 
 
+-- | The "textbook" definition straight from `transformers` package. (I even named the bound
+--   variables the same as there.) It happens to be very similar to bind3 --- just sprinkle some
+--   pattern matching.
+--
+-- λ run id $ bind' rec . bind' rec $ t 10
+-- 8
+--
+-- λ run id $ foldl (.) id (replicate 10 $ bind' rec) $ t 10
+-- 0
+
+bindT :: (a -> T b) -> T a -> T b
+bindT f m = T $ \c -> run (\x -> run c (f x)) m
+
+
 -- | This is the cartesian product on T.
 --
 -- λ run id $ ft (uncurry (+)) $ mf (t 1) (t 2)
